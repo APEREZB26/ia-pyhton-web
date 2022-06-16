@@ -22,7 +22,7 @@ CORS(app)
 mysql = MySQL();
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
+app.config['MYSQL_DATABASE_PASSWORD']='211926'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 
@@ -51,7 +51,8 @@ def login():
         sql = f'SELECT * FROM client WHERE dni = {dni}'
         cursor.execute(sql)
         user = cursor.fetchone()
-
+        print("user_dni: ", user[4])
+        
         if user and check_password_hash(user[3], password):
             detected_name, label_name = recognition_liveness('face_recognition_and_liveness/face_liveness_detection/liveness.model',
                                                              'face_recognition_and_liveness/face_liveness_detection/label_encoder.pickle',
@@ -99,8 +100,8 @@ def register():
         conn.close()
 
         # Guardar en local
-        os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/client/{dni}')
-        f = open(f'face_recognition_and_liveness/face_recognition/dataset/client/{dni}/{secure_filename(img.filename)}','wb')
+        os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
+        f = open(f'face_recognition_and_liveness/face_recognition/dataset/{dni}/{secure_filename(img.filename)}','wb')
         response = requests.get(urlImage)
         f.write(response.content)
         f.close()
