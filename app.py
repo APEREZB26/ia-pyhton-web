@@ -1,5 +1,3 @@
-from flask import Flask, request, render_template, url_for
-from select import select
 from flask import Flask, request
 from flask import redirect, url_for, render_template, session
 from flaskext.mysql import MySQL
@@ -103,9 +101,9 @@ def register():
 def client():
     return render_template('client_page.html')
 
-# @app.route('/admin', methods=['GET'])
-# def admin():
-#     return render_template('admin_page.html')
+@app.route('/admin', methods=['GET'])
+def admin():
+    return render_template('admin_page.html')
 
 # @app.route('/admin/manage/profile', methods=['GET', 'POST'])
 # def manageprofileAdmin():
