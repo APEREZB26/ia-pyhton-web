@@ -1,7 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template, url_for
 from flask import redirect, url_for, render_template, session
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from face_recognition_and_liveness.face_liveness_detection.face_recognition_liveness_app import recognition_liveness
+
 # from werkzeug.utils import secure_filename
 import os
 
@@ -16,7 +19,7 @@ app.secret_key = 'elmejorgurpo'  #SECRET KEY
 mysql = MySQL();
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
+app.config['MYSQL_DATABASE_PASSWORD']='koude'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 
@@ -35,6 +38,38 @@ def index():
 def login():
     session.clear()
     # return login_user()
+    if request.method == 'POST':
+        dni = request.form['dni']
+        password = request.form['password']
+
+        conn = mysql.connect();
+        cursor = conn.cursor();
+        sql = f'SELECT * FROM client WHERE dni = {dni}'
+        cursor.execute(sql)
+        user = cursor.fetchone()
+
+        if user and check_password_hash(user[3], password):
+            detected_name, label_name = recognition_liveness('face_recognition_and_liveness/face_liveness_detection/liveness.model',
+                                                             'face_recognition_and_liveness/face_liveness_detection/label_encoder.pickle',
+                                                             'face_recognition_and_liveness/face_liveness_detection/face_detector',
+                                                             'face_recognition_and_liveness/face_recognition/encoded_faces.pickle',
+                                                             confidence=0.5)
+            print("detected_name: ",detected_name)
+            print("label_name: ",label_name)
+            print("user_dni: ", user[4])
+            if user[4] == detected_name and label_name == 'real' and user[5] == 1:
+                session['id'] = user[0]
+                session['fullname'] = user[1]
+                return redirect(url_for('admin'))
+            elif user[4] == detected_name and label_name == 'real' and user[5]== 0:
+                session['id'] = user[0]
+                session['fullname'] = user[1]
+                print("session: ", session['id'])
+                return redirect(url_for('client'))
+            else:
+                return render_template('login_page.html', invalid_user=True, username=user[1])
+        else:
+            return render_template('login_page.html', incorrect=True)
     return render_template('login_page.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -61,9 +96,9 @@ def register():
         return redirect(url_for('login'))
     return render_template('register_page.html')
 
-# @app.route('/client', methods=['GET', 'POST'])
-# def client():
-#     return render_template('client_page.html')
+@app.route('/client', methods=['GET', 'POST'])
+def client():
+    return render_template('client_page.html')
 
 # @app.route('/admin', methods=['GET'])
 # def admin():
