@@ -58,6 +58,7 @@ def register():
         cursor.execute(sql)
         conn.commit()
         conn.close()
+
         os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
         return redirect(url_for('login'))
     return render_template('register_page.html')
@@ -119,16 +120,15 @@ def listAdmin():
 #     return render_template('admin_crud_page.html', id=id, fullname=fullname, users=user)
 
 
-# @app.route('/admin/manage/deleteEmpl/<idE>')
-# def deleteAdmin(idE):
-
-#     user = Users.query.all()
-#     #Add Admin
-#     Users.query.filter(Users.id == idE).delete()
-#     # db.session.delete(userId)
-#     db.session.commit()
-
-#     return render_template('admin_crud_page.html', users=user)
+@app.route('/admin/manage/deleteEmpl/<int:id>')
+def deleteAdmin(id):
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    # sql = "DELETE FROM employee WHERE id=%d", (id)
+    cursor.execute("DELETE FROM employee WHERE id=%s", (id))
+    conn.commit()
+    conn.close()
+    return render_template('admin_crud_page.html')
 
 @app.route('/logout')
 def logout():
