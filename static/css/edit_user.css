@@ -37,3 +37,9 @@
   cursor: pointer;
   text-align: center;
 }
+
+.edit-img {
+  border-radius: 50% !important;
+  width: 8rem !important;
+  height: 8rem !important;
+}

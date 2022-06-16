@@ -1,19 +1,21 @@
-from flask import Flask, request
-from flask import redirect, url_for, render_template, session
+from flask import Flask, request, redirect, url_for, render_template, session
+from flask_cors import CORS
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from werkzeug.utils import secure_filename
 from face_recognition_and_liveness.face_liveness_detection.face_recognition_liveness_app import recognition_liveness
 
-# from werkzeug.utils import secure_filename
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 import os
 
-# Controladores
-# from controllers.auth import *
-# from controllers.auth.register import register_client
+
 
 app = Flask(__name__)
 app.secret_key = 'elmejorgurpo'  #SECRET KEY
+CORS(app)
 
 # Conexion a la DB
 mysql = MySQL();
@@ -23,10 +25,19 @@ app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 
+cloudinary.config( 
+  cloud_name = "awdw", 
+  api_key = "249828171516131", 
+  api_secret = "hqKtXEr0J1nu4G2bbaF3rJNE8yY",
+  secure = True
+)
+
 @app.route('/')
 def index():
     return redirect(url_for('login'))
 
+# === AUTH ===
+# Login User
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     session.clear()
@@ -65,11 +76,12 @@ def login():
             return render_template('login_page.html', incorrect=True)
     return render_template('login_page.html')
 
+
+# Register Client
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # return register_client()
     if request.method == 'POST':
-        # img = request.files['image']
         fullname = request.form['fullname']
         email = request.form["email"]
         dni = request.form['dni']
@@ -107,38 +119,7 @@ def admin():
 #         return redirect(url_for('admin'))
 
 
-
-# @app.route('/admin/manage/addEmpl', methods=['POST'])
-# def addAdmin():
-
-#     user = Users.query.filter(Users.rol == 1)
-
-#     #Add Admin
-#     img = request.files['photo']
-#     fullname=request.form["fullname"]
-#     email=request.form["email"]
-#     dni=request.form["dni"]
-#     password=request.form["password"]
-#     rol = request.form["rol"]
-#     hashed_password = generate_password_hash(password, method='sha256')
-#     phone=request.form["phone"]
-
-#     os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
-
-#     filename = secure_filename(img.filename) #Nombre original del archivo
-     
-#     upload_path = os.path.join (f'face_recognition_and_liveness/face_recognition/dataset/{dni}', filename) 
-#     img.save(upload_path) #Nombre original del archivo  
-
-#     newUser = Users(fullname=fullname, email=email, dni=dni, password=hashed_password, rol=rol,phone=phone)
-#     db.session.add(newUser)
-#     print(db.session.add(newUser))
-#     db.session.commit()
-
-#     return render_template('admin_crud_page.html', id=id, fullname=fullname, users=user)
-
-# CRUD EMPLOYEE
-
+# === CRUD EMPLOYEE ===
 # Employee list
 @app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
 def listAdmin():
@@ -149,6 +130,33 @@ def listAdmin():
     usuarios = cursor.fetchall()
 
     return render_template('admin_crud_page.html', usuarios=usuarios)
+
+# Employee create
+@app.route('/admin/manage/addEmpl', methods=['POST'])
+def addAdmin():
+    fullname = request.form["fullname"]
+    flag = 1
+    email=request.form["email"]
+    dni=request.form["dni"]
+    password=request.form["password"]
+    hashed_password = generate_password_hash(password, method='sha256')
+    phone=request.form["phone"]
+    img = request.files['photo']
+
+    if img:
+        upload_result = cloudinary.uploader.upload(img, public_id = dni)
+        urlImage = upload_result['secure_url']
+        # upload_path = os.path.join (f'face_recognition_and_liveness/face_recognition/dataset/{dni}', filename) 
+        # img.save(upload_path)
+        conn = mysql.connect();
+        cursor = conn.cursor();
+        cursor.execute('INSERT INTO employee (fullname, email, password, dni, phone, flag, img) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+        (fullname, email, hashed_password, dni, phone, flag, urlImage))
+        conn.commit()
+    os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
+
+    return redirect(url_for('listAdmin'))
+
 
 
 # Employee get for id
@@ -191,7 +199,7 @@ def deleteAdmin(id):
     return redirect(url_for('listAdmin'))
 
 
-# LOGOUT
+# === LOGOUT ===
 @app.route('/logout')
 def logout():
     session.clear()

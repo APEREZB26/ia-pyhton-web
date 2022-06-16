@@ -83,7 +83,6 @@
           <input type="number" value="" name="dni" maxlength="8" placeholder="N° Dni" class="data" required />
           <div class="edit__main__inputs">
             <input type="number" value="" name="phone" maxlength="9" placeholder="+51" class="data" required />
-            <input type="text" value="" name="rol" maxlength="8" placeholder="Rol" class="data" required />
           </div>
           <input type="email" value="" name="email" placeholder="Email" class="data in-add-email d-none" required />
           <input type="password" value="" name="password" maxlength="9" placeholder="Password" class="data in-add-pass d-none" required />
@@ -179,7 +178,7 @@
               {% for usuario in usuarios %}
               <tr>
                 <td>
-                  <img src={{ usuario.7 }} alt="img" />
+                  <img class="img-form-user" src={{ usuario.7 }} alt="img" />
                 </td>
                 <td>{{usuario.1}}</td>
                 <td>{{usuario.4}}</td>

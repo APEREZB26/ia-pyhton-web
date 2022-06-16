@@ -77,7 +77,7 @@
                 <form action="/admin/manage/updateEmpl/{{user.0}}" class="main-datos-form" method="POST" enctype="multipart/form-data">
                     <!-- Parte datos -->
                     <div class="main-datos-form-img">
-                        <img src="{{ url_for('static', filename='assets/img/user.jpg') }}" alt="img" />
+                        <img class="edit-img" src={{user.7}} alt="img" />
                         <input type="file" value="" name="photo" class="data-foto" />
                     </div>
                     <input type="text" value={{user.1}} name="fullname" maxlength="30" placeholder="Fullname"
