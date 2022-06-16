@@ -52,7 +52,7 @@ def login():
         cursor.execute(sql)
         user = cursor.fetchone()
         print("user_dni: ", user[4])
-        
+
         if user and check_password_hash(user[3], password):
             detected_name, label_name = recognition_liveness('face_recognition_and_liveness/face_liveness_detection/liveness.model',
                                                              'face_recognition_and_liveness/face_liveness_detection/label_encoder.pickle',
@@ -89,6 +89,9 @@ def register():
         hashed_password = generate_password_hash(password, method='sha256')
         flag = 0
         img = request.files['photo']
+        f = open("dni.txt", "w")
+        f.write(dni)
+        f.close()
 
         # Guardar en Cloudinary
         upload_result = cloudinary.uploader.upload(img, public_id = dni)
@@ -104,6 +107,7 @@ def register():
         f = open(f'face_recognition_and_liveness/face_recognition/dataset/{dni}/{secure_filename(img.filename)}','wb')
         response = requests.get(urlImage)
         f.write(response.content)
+        os.system("Codificador.bat")
         f.close()
 
         return redirect(url_for('login'))
@@ -153,14 +157,17 @@ def addAdmin():
     conn.close()
 
     # Guardar en local
-    os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/admin/{dni}')
-    f = open(f'face_recognition_and_liveness/face_recognition/dataset/admin/{dni}/{secure_filename(img.filename)}','wb')
+    os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
+    f = open(f'face_recognition_and_liveness/face_recognition/dataset/{dni}/{secure_filename(img.filename)}','wb')
     response = requests.get(urlImage)
     f.write(response.content)
+    # f = open("dni.txt", "w")
+    # f.write(dni)
+    # os.system("Codificador.bat")
+
     f.close()
 
     return redirect(url_for('listAdmin'))
-
 
 
 # Employee get for id

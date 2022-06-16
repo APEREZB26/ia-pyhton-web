@@ -30,8 +30,8 @@
                                 <label>Nombres</label>
                                 <input type="text" name="fullname" placeholder="Nombres/Apellidos" class="data" />
                             </div>
-                           
-                            <input type="file" name="photo"  class="data" style="height: 1rem;" />
+
+                            <input type="file" name="photo" class="data" style="height: 1rem;" />
                         </div>
                     </div>
                     <label>Correo</label>
@@ -40,7 +40,8 @@
                     <input type="text" name="dni" placeholder="N° Dni" class="data" />
                     <label>Contraseña</label>
                     <input type="password" name="password" placeholder="Contraseña" class="data" />
-                    <p class="check"><input type="checkbox" />Crear una cuenta significa que está de acuerdo con nuestros Términos
+                    <p class="check"><input type="checkbox" />Crear una cuenta significa que está de acuerdo con
+                        nuestros Términos
                         de servicio, Política de privacidad y nuestra Configuración de notificaciones
                         predeterminada.</p>
                     <input type="submit" value="Register" class="reg-button" />
@@ -52,6 +53,14 @@
             </div>
         </div>
     </section>
+    <div class="spinner-container">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+        <p>Codificando Datos...</p>
+    </div>
+    <script type='text/javascript' src="{{ url_for('static', filename='js/animations.js') }}"></script>
 </body>
 
 </html>
