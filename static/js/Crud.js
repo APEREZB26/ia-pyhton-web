@@ -1,11 +1,9 @@
 /* PARA ABRIR EL MODAL DELETE*/
 const buttonsEdit = document.querySelectorAll(".button-edit");
 buttonsEdit.forEach((buttonEdit) => {
-  console.log(buttonEdit);
   buttonEdit.addEventListener("click", () => {
-    const id = document.getElementById("id-user");
-    console.log(id);
-    //window.location.href = `/users/edit/${id}`;
+    let id = buttonEdit.children[0].value;
+    window.location.href = `/admin/manage/getEmpl/${id}`;
   });
 });
 

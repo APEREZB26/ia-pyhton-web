@@ -179,7 +179,7 @@
               {% for usuario in usuarios %}
               <tr>
                 <td>
-                  <img src="{{ usuario.img }}" alt="img" />
+                  <img src={{ usuario.7 }} alt="img" />
                 </td>
                 <td>{{usuario.1}}</td>
                 <td>{{usuario.4}}</td>
@@ -191,7 +191,7 @@
                 {% endif %}
                 <td>
                   <button class="button-edit" id="id-user" >
-                    <input type="hidden" value={{usuario.id}} >
+                    <input type="hidden" value={{usuario.0}} >
                     <img src="{{ url_for('static', filename='assets/img/editar.png') }}" alt="img" />
                   </button>
                   <!-- <button class="button-delete">

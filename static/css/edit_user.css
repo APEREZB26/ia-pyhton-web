@@ -1,0 +1,39 @@
+.edit_user_form {
+  width: 80%;
+  height: max-content;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 8px 0px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.submit_buttons {
+  display: flex;
+  width: 100%;
+}
+
+.edit__main__inputs_user {
+  display: flex;
+  width: 91%;
+}
+
+.cont_detele_button {
+  display: flex;
+  justify-content: center;
+}
+.delete-button {
+  float: left;
+  border-radius: 8px;
+  width: 70%;
+  margin: 10px;
+  padding: 10px;
+  color: #fff;
+  background-color: rgb(252, 51, 16);
+  border-bottom: solid 2px rgb(238, 61, 16);
+  cursor: pointer;
+  text-align: center;
+}

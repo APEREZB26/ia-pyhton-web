@@ -19,19 +19,12 @@ app.secret_key = 'elmejorgurpo'  #SECRET KEY
 mysql = MySQL();
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='koude'
+app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 
 @app.route('/')
 def index():
-    # conn = mysql.connect();
-    # cursor = conn.cursor();
-    # sql = "SELECT * FROM user WHERE user.id=1"
-    # cursor.execute(sql)
-    # resultado = cursor.fetchone();
-    # conn.close();
-    # print("Esots son los usuarios", resultado)
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -85,7 +78,6 @@ def register():
         flag = 0
         img = "img"
 
-        # DATABASE
         conn = mysql.connect();
         cursor = conn.cursor();
         sql = "INSERT INTO client (fullname, email, password, dni, flag, img) VALUES ('{}', '{}', '{}', '{}', '{}', '{}')".format(fullname, email, hashed_password, dni, flag, img)
@@ -114,15 +106,7 @@ def admin():
 #     except Exception as e:
 #         return redirect(url_for('admin'))
 
-@app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
-def listAdmin():
-    conn = mysql.connect();
-    cursor = conn.cursor();
-    sql = "SELECT * FROM employee"
-    cursor.execute(sql)
-    usuarios = cursor.fetchall()
-    print("Estos son los usuarios",usuarios)
-    return render_template('admin_crud_page.html', usuarios=usuarios)
+
 
 # @app.route('/admin/manage/addEmpl', methods=['POST'])
 # def addAdmin():
@@ -153,7 +137,48 @@ def listAdmin():
 
 #     return render_template('admin_crud_page.html', id=id, fullname=fullname, users=user)
 
+# CRUD EMPLOYEE
 
+# Employee list
+@app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
+def listAdmin():
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    sql = "SELECT * FROM employee"
+    cursor.execute(sql)
+    usuarios = cursor.fetchall()
+
+    return render_template('admin_crud_page.html', usuarios=usuarios)
+
+
+# Employee get for id
+@app.route('/admin/manage/getEmpl/<int:id>')
+def getAdmin(id):
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    sql = "SELECT * FROM employee WHERE id = {}".format(id)
+    cursor.execute(sql)
+    user = cursor.fetchone()
+    conn.close()
+    print("Estos son los users",user)
+
+    return render_template('admin_edit_user.html', user=user)
+
+
+# Employee update
+@app.route('/admin/manage/updateEmpl/<int:id>', methods=['POST'])
+def updateAdmin(id):
+    phone = request.form["phone"]
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    cursor.execute("UPDATE employee SET phone='{}' WHERE id='{}'".format(phone, id))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('listAdmin'))
+
+
+# Employee delete
 @app.route('/admin/manage/deleteEmpl/<int:id>')
 def deleteAdmin(id):
     conn = mysql.connect();
@@ -162,8 +187,11 @@ def deleteAdmin(id):
     cursor.execute("DELETE FROM employee WHERE id=%s", (id))
     conn.commit()
     conn.close()
-    return render_template('admin_crud_page.html')
 
+    return redirect(url_for('listAdmin'))
+
+
+# LOGOUT
 @app.route('/logout')
 def logout():
     session.clear()
