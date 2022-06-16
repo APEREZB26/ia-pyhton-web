@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template, url_for
+from select import select
+from flask import Flask, request
 from flask import redirect, url_for, render_template, session
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -92,6 +94,7 @@ def register():
         cursor.execute(sql)
         conn.commit()
         conn.close()
+
         os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
         return redirect(url_for('login'))
     return render_template('register_page.html')
@@ -113,10 +116,15 @@ def client():
 #     except Exception as e:
 #         return redirect(url_for('admin'))
 
-# @app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
-# def listAdmin():
-#     user = Users.query.all()
-#     return render_template('admin_crud_page.html',users=user)
+@app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
+def listAdmin():
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    sql = "SELECT * FROM employee"
+    cursor.execute(sql)
+    usuarios = cursor.fetchall()
+    print("Estos son los usuarios",usuarios)
+    return render_template('admin_crud_page.html', usuarios=usuarios)
 
 # @app.route('/admin/manage/addEmpl', methods=['POST'])
 # def addAdmin():
@@ -148,16 +156,15 @@ def client():
 #     return render_template('admin_crud_page.html', id=id, fullname=fullname, users=user)
 
 
-# @app.route('/admin/manage/deleteEmpl/<idE>')
-# def deleteAdmin(idE):
-
-#     user = Users.query.all()
-#     #Add Admin
-#     Users.query.filter(Users.id == idE).delete()
-#     # db.session.delete(userId)
-#     db.session.commit()
-
-#     return render_template('admin_crud_page.html', users=user)
+@app.route('/admin/manage/deleteEmpl/<int:id>')
+def deleteAdmin(id):
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    # sql = "DELETE FROM employee WHERE id=%d", (id)
+    cursor.execute("DELETE FROM employee WHERE id=%s", (id))
+    conn.commit()
+    conn.close()
+    return render_template('admin_crud_page.html')
 
 @app.route('/logout')
 def logout():
