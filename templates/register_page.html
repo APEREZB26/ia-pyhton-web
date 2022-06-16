@@ -22,12 +22,16 @@
             <div class="formBx">
                 <h2>Crea una Cuenta</h2>
                 <br>
-                <form method="post">
+                <form method="post" style="width: 50%;" enctype="multipart/form-data">
                     <br>
                     <div class="input_container">
-                        <div>
-                            <label>Nombres</label>
-                            <input type="text" name="fullname" placeholder="Nombres/Apellidos" class="data" />
+                        <div style="display: flex; flex-direction: row; align-items: flex-end;">
+                            <div>
+                                <label>Nombres</label>
+                                <input type="text" name="fullname" placeholder="Nombres/Apellidos" class="data" />
+                            </div>
+                           
+                            <input type="file" name="photo"  class="data" style="height: 1rem;" />
                         </div>
                     </div>
                     <label>Correo</label>

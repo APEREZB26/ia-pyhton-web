@@ -4,6 +4,7 @@ from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from face_recognition_and_liveness.face_liveness_detection.face_recognition_liveness_app import recognition_liveness
+import requests
 
 import cloudinary
 import cloudinary.uploader
@@ -41,7 +42,6 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     session.clear()
-    # return login_user()
     if request.method == 'POST':
         dni = request.form['dni']
         password = request.form['password']
@@ -80,7 +80,6 @@ def login():
 # Register Client
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    # return register_client()
     if request.method == 'POST':
         fullname = request.form['fullname']
         email = request.form["email"]
@@ -88,16 +87,24 @@ def register():
         password = request.form['password']
         hashed_password = generate_password_hash(password, method='sha256')
         flag = 0
-        img = "img"
+        img = request.files['photo']
 
+        # Guardar en Cloudinary
+        upload_result = cloudinary.uploader.upload(img, public_id = dni)
+        urlImage = str(upload_result['secure_url'])
         conn = mysql.connect();
         cursor = conn.cursor();
-        sql = "INSERT INTO client (fullname, email, password, dni, flag, img) VALUES ('{}', '{}', '{}', '{}', '{}', '{}')".format(fullname, email, hashed_password, dni, flag, img)
-        cursor.execute(sql)
+        cursor.execute("INSERT INTO client (fullname, email, password, dni, flag, img) VALUES ('{}', '{}', '{}', '{}', '{}', '{}')".format(fullname, email, hashed_password, dni, flag, urlImage))
         conn.commit()
         conn.close()
 
-        os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
+        # Guardar en local
+        os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/client/{dni}')
+        f = open(f'face_recognition_and_liveness/face_recognition/dataset/client/{dni}/{secure_filename(img.filename)}','wb')
+        response = requests.get(urlImage)
+        f.write(response.content)
+        f.close()
+
         return redirect(url_for('login'))
     return render_template('register_page.html')
 
@@ -108,15 +115,6 @@ def client():
 @app.route('/admin', methods=['GET'])
 def admin():
     return render_template('admin_page.html')
-
-# @app.route('/admin/manage/profile', methods=['GET', 'POST'])
-# def manageprofileAdmin():
-#     try:
-#         id = session['id']
-#         fullname = session['fullname']
-#         return render_template('admin_crud_profile_page.html', id=id, fullname=fullname)
-#     except Exception as e:
-#         return redirect(url_for('admin'))
 
 
 # === CRUD EMPLOYEE ===
@@ -143,17 +141,22 @@ def addAdmin():
     phone=request.form["phone"]
     img = request.files['photo']
 
-    if img:
-        upload_result = cloudinary.uploader.upload(img, public_id = dni)
-        urlImage = upload_result['secure_url']
-        # upload_path = os.path.join (f'face_recognition_and_liveness/face_recognition/dataset/{dni}', filename) 
-        # img.save(upload_path)
-        conn = mysql.connect();
-        cursor = conn.cursor();
-        cursor.execute('INSERT INTO employee (fullname, email, password, dni, phone, flag, img) VALUES (%s, %s, %s, %s, %s, %s, %s)',
-        (fullname, email, hashed_password, dni, phone, flag, urlImage))
-        conn.commit()
-    os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')
+    # Guardar en Cloudinary
+    upload_result = cloudinary.uploader.upload(img, public_id = dni)
+    urlImage = str(upload_result['secure_url'])
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    cursor.execute('INSERT INTO employee (fullname, email, password, dni, phone, flag, img) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+    (fullname, email, hashed_password, dni, phone, flag, urlImage))
+    conn.commit()
+    conn.close()
+
+    # Guardar en local
+    os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/admin/{dni}')
+    f = open(f'face_recognition_and_liveness/face_recognition/dataset/admin/{dni}/{secure_filename(img.filename)}','wb')
+    response = requests.get(urlImage)
+    f.write(response.content)
+    f.close()
 
     return redirect(url_for('listAdmin'))
 
