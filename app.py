@@ -1,3 +1,4 @@
+from select import select
 from flask import Flask, request
 from flask import redirect, url_for, render_template, session
 from flaskext.mysql import MySQL
@@ -16,7 +17,7 @@ app.secret_key = 'elmejorgurpo'  #SECRET KEY
 mysql = MySQL();
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
+app.config['MYSQL_DATABASE_PASSWORD']='211926'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 
@@ -78,10 +79,15 @@ def register():
 #     except Exception as e:
 #         return redirect(url_for('admin'))
 
-# @app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
-# def listAdmin():
-#     user = Users.query.all()
-#     return render_template('admin_crud_page.html',users=user)
+@app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
+def listAdmin():
+    conn = mysql.connect();
+    cursor = conn.cursor();
+    sql = "SELECT * FROM employee"
+    cursor.execute(sql)
+    usuarios = cursor.fetchall()
+    print("Estos son los usuarios",usuarios)
+    return render_template('admin_crud_page.html', usuarios=usuarios)
 
 # @app.route('/admin/manage/addEmpl', methods=['POST'])
 # def addAdmin():

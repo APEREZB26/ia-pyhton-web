@@ -176,18 +176,22 @@
           </thead>
           <tbody>
             <div>
-              {% for user in users %}
+              {% for usuario in usuarios %}
               <tr>
                 <td>
-                  <img src="{{ user.img }}" alt="img" />
+                  <img src="{{ usuario.img }}" alt="img" />
                 </td>
-                <td>{{user.fullname}}</td>
-                <td>{{user.dni}}</td>
-                <td>{{user.dni}}</td>
-                <td>{{user.rol}}</td>
+                <td>{{usuario.1}}</td>
+                <td>{{usuario.4}}</td>
+                <td>{{usuario.5}}</td>
+                {% if usuario.6 == 0 %}
+                <td>User</td>
+                {% else %}
+                <td>Admin</td>
+                {% endif %}
                 <td>
                   <button class="button-edit" id="id-user" >
-                    <input type="hidden" value={{user.id}} >
+                    <input type="hidden" value={{usuario.id}} >
                     <img src="{{ url_for('static', filename='assets/img/editar.png') }}" alt="img" />
                   </button>
                   <!-- <button class="button-delete">
