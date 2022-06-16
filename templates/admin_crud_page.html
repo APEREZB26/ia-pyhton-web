@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}" />
+</head>
+
+<body>
+  <nav class="nav container">
+    <!-- Primary -->
+    <ul class="nav__primary">
+      <li class="nav__element">
+        <img class="nav__element-logo" src="{{ url_for('static', filename='assets/img/node.png') }}" alt="icon" />
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="/admin">Dashboard</a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="#">Features</a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="/admin/listEmpl">Crud</a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="#">Apps</a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="#">Pages</a>
+      </li>
+    </ul>
+
+    <!-- Secondary -->
+    <ul class="nav__secondary">
+      <li class="nav__element">
+        <a class="nav__element-link" href="/"><i class="fa-solid fa-magnifying-glass"></i></a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="/"><i class="fa-solid fa-chart-pie"></i></a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="/"><i class="fa-solid fa-chart-simple"></i></a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="/"><i class="fa-solid fa-cart-arrow-down"></i></a>
+      </li>
+      <li class="nav__element">
+        <img class="nav__element-from" src="{{ url_for('static', filename='assets/img/peru.png') }}" alt="peru" />
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link" href="/">Hi, {{fullname}}</a>
+      </li>
+      <li class="nav__element">
+        <a class="nav__element-link nav__element-profile" href="/">S</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- CONTENT MODAL EDITAR -->
+  <div class="content-modal-edit">
+    <div class="modal-edit-main">
+      <!-- Info -->
+      <div class="edit-main-info">
+        <h2>Guardar Empleado</h2>
+      </div>
+      <!-- Parte editar datos -->
+      <div class="edit-main-datos">
+        <form action="/admin/manage/addEmpl" class="main-datos-form" method="POST" enctype="multipart/form-data">
+          <!-- Parte datos -->
+          <div class="main-datos-form-img">
+            <img src="{{ url_for('static', filename='assets/img/peru.png') }}" alt="img" />
+            <input type="file" value="" name="photo" class="data-foto" />
+          </div>
+          <input type="text" value="" name="fullname" maxlength="30" placeholder="Fullname" class="data" required />
+          <input type="number" value="" name="dni" maxlength="8" placeholder="N° Dni" class="data" required />
+          <div class="edit__main__inputs">
+            <input type="number" value="" name="phone" maxlength="9" placeholder="+51" class="data" required />
+            <input type="text" value="" name="rol" maxlength="8" placeholder="Rol" class="data" required />
+          </div>
+          <input type="email" value="" name="email" placeholder="Email" class="data in-add-email d-none" required />
+          <input type="password" value="" name="password" maxlength="9" placeholder="Password" class="data in-add-pass d-none" required />
+          <!-- Parte botón -->
+          <input type="submit" value="Cancelar" class="cancel-button" />
+          <input type="submit" value="Guardar" class="edit-button" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- CONTENT MODAL ELIMINAR -->
+  <div class="content-modal-delete">
+    <div class="modal-delete-main">
+      <!-- Info -->
+      <div class="delete-main-info">
+        <h2>¿Estás seguro que deseas eliminar?</h2>
+      </div>
+      <!-- Parte botón -->
+      <form class="delete-main-button" method="POST">
+        <button class="button-cancelar"><a>Cancelar</a></button>
+        <input type="hidden" value="">
+        <input type="submit" class="button-eliminar"><a href="">Eliminar</a></input>
+      </form>
+    </div>
+  </div>
+  <hr class="divider" />
+  <!-- Info -->
+  <div class="info container">
+    <div class="info__titles">
+      <h1>Crud</h1>
+      <ul>
+        <li class="nav__element"><i class="fa-solid fa-house"></i></li>
+        <li>Crud</li>
+        <li>Listado de Empleados</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Content Barra -->
+  <div class="content-barra container">
+    <div class="content__stats-barra">
+      <div class="content__stats-more">
+        <a class="more__element-crud-button" href="/admin/manage/listEmpl">
+          <div class="more__element-crud">
+            <div class="more__element-crud-div">
+              <div class="more__element-image">
+                <img src="{{ url_for('static', filename='assets/img/lista.png') }}" alt="img" />
+              </div>
+              <div class="more__element-name">
+                <h4>Lista</h4>
+                <p>Empleados</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a class="more__element-crud-button" href="/admin/manage/profile">
+          <div class="more__element-crud">
+            <div class="more__element-crud-div">
+              <div class="more__element-image">
+                <img src="{{ url_for('static', filename='assets/img/config.png') }}" alt="img" />
+              </div>
+              <div class="more__element-name">
+                <h4>Configuración</h4>
+                <p>Perfil</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="content__crud">
+      <div class="content__crud__tittle">
+        <h2>Listado de Empleados</h2>
+        <button class="button-add">
+          <img src="{{ url_for('static', filename='assets/img/agregar.png') }}" alt="img" />
+        </button>
+      </div>
+      <div class="crud-table-main">
+        <!--PARTE TABLA-->
+        <table class="table-main-table">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Nombre</th>
+              <th>Dni</th>
+              <th>Teléfono</th>
+              <th>Rol</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <div>
+              {% for user in users %}
+              <tr>
+                <td>
+                  <img src="{{ user.img }}" alt="img" />
+                </td>
+                <td>{{user.fullname}}</td>
+                <td>{{user.dni}}</td>
+                <td>{{user.dni}}</td>
+                <td>{{user.rol}}</td>
+                <td>
+                  <button class="button-edit" id="id-user" >
+                    <input type="hidden" value={{user.id}} >
+                    <img src="{{ url_for('static', filename='assets/img/editar.png') }}" alt="img" />
+                  </button>
+                  <!-- <button class="button-delete">
+                    <img src="{{ url_for('static', filename='assets/img/eliminar.png') }}" alt="img" />
+                  </button> -->
+                </td>
+              </tr>
+              {% endfor %}
+            </div>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/Crud.js') }}">
+  </script>
+</body>
+
+</html>

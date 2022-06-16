@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="containerReg">
+        <div class="user singupBx">
+            <div class="logo">
+                <a href="./login">LOGO</a>
+            </div>
+            <div class="imgBxR">
+                <div class="bubbleR">Inicia Tu Cuenta Ahora y Disfruta de los Beneficios</div>
+                <img src="{{ url_for('static', filename='assets/bank.svg') }}" alt="img" />
+            </div>
+            <div class="formBx">
+                <h2>Crea una Cuenta</h2>
+                <br>
+                <form method="post">
+                    <br>
+                    <div class="input_container">
+                        <div>
+                            <label>Nombres</label>
+                            <input type="text" name="fullname" placeholder="Nombres/Apellidos" class="data" />
+                        </div>
+                    </div>
+                    <label>Correo</label>
+                    <input type="email" name="email" placeholder="example@gmail.com" class="data" />
+                    <label>N° DNI</label>
+                    <input type="text" name="dni" placeholder="N° Dni" class="data" />
+                    <label>Contraseña</label>
+                    <input type="password" name="password" placeholder="Contraseña" class="data" />
+                    <p class="check"><input type="checkbox" />Crear una cuenta significa que está de acuerdo con nuestros Términos
+                        de servicio, Política de privacidad y nuestra Configuración de notificaciones
+                        predeterminada.</p>
+                    <input type="submit" value="Register" class="reg-button" />
+                    <p class="signup">
+                        ¿Tienes una cuenta?
+                        <a href="./login" style="color:#59caffa1">Inicia Sesión</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
