@@ -22,29 +22,33 @@
             <div class="formBx">
                 <h2>Crea una Cuenta</h2>
                 <br>
-                <form method="post" style="width: 50%;" enctype="multipart/form-data">
+                <form method="post" style="width: 50%;" enctype="multipart/form-data" id="formulario">
                     <br>
                     <div class="input_container">
                         <div style="display: flex; flex-direction: row; align-items: flex-end;">
                             <div>
                                 <label>Nombres</label>
-                                <input type="text" name="fullname" placeholder="Nombres/Apellidos" class="data" />
+                                <input type="text" id="fullname" name="fullname" placeholder="Nombres/Apellidos"
+                                    class="data" />
                             </div>
 
-                            <input type="file" name="photo" class="data" style="height: 1rem;" />
+                            <input type="file" id="photo" name="photo" class="data" style="height: 1rem;" />
                         </div>
                     </div>
                     <label>Correo</label>
-                    <input type="email" name="email" placeholder="example@gmail.com" class="data" />
+                    <input type="email" id="email" name="email" placeholder="example@gmail.com" class="data" />
                     <label>N° DNI</label>
-                    <input type="text" name="dni" placeholder="N° Dni" class="data" />
+                    <input type="text" id="dni" name="dni" placeholder="N° Dni" class="data" />
                     <label>Contraseña</label>
-                    <input type="password" name="password" placeholder="Contraseña" class="data" />
-                    <p class="check"><input type="checkbox" />Crear una cuenta significa que está de acuerdo con
+                    <input type="password" id="password" name="password" placeholder="Contraseña" class="data" />
+                    <p class="check"><input type="checkbox" id="checkbox" />Crear una cuenta significa que está de
+                        acuerdo con
                         nuestros Términos
                         de servicio, Política de privacidad y nuestra Configuración de notificaciones
                         predeterminada.</p>
-                    <input type="submit" value="Register" class="reg-button" />
+
+                        <p class="error">Por favor rellena todos tus datos</p>
+                    <button type="submit" value="Register" class="reg-button">Registarse</button>
                     <p class="signup">
                         ¿Tienes una cuenta?
                         <a href="./login" style="color:#59caffa1">Inicia Sesión</a>
@@ -60,7 +64,7 @@
         </div>
         <p>Codificando Datos...</p>
     </div>
-    <script type='text/javascript' src="{{ url_for('static', filename='js/animations.js') }}"></script>
+    <script type='text/javascript' src="{{ url_for('static', filename='js/validationReg.js') }}"></script>
 </body>
 
 </html>

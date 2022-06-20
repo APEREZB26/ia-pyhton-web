@@ -22,16 +22,16 @@
       <h1>Iniciar Sesión</h1>
       <br>
       <br>
-      <form method="POST">
+      <form method="POST" id="formLog">
         <!--Email-->
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <label>DNI</label>
-          <input type="text" id="sample3" name="dni" placeholder="DNI">
+          <input type="text" id="sample3" class="inputLog" name="dni" placeholder="DNI">
         </div>
         <!--Password-->
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <label>Contraseña</label>
-          <input type="password" id="sample3" name="password" placeholder="Contraseña">
+          <input type="password" id="sample3" class="inputLog" name="password" placeholder="Contraseña">
         </div>
         <br>
         {% if incorrect == True %}
@@ -40,6 +40,7 @@
         <p style="color:red"> Tu no eres {{username}} </p>
         {% endif %}
         <!--CheckBox-->
+        <p class="error">Por favor rellena todos tus datos</p>
         <button type="submit" class="sign-in-btn">
           Sign In
         </button>
@@ -51,9 +52,7 @@
 
   </div>
   <!--/.form-section-->
-  <script>
-     
-  </script>
+  <script type='text/javascript' src="{{ url_for('static', filename='js/validationLog.js') }}"></script>
 </body>
 
 </html>

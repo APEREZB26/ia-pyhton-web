@@ -89,9 +89,9 @@ def register():
         hashed_password = generate_password_hash(password, method='sha256')
         flag = 0
         img = request.files['photo']
-        f = open("dni.txt", "w")
-        f.write(dni)
-        f.close()
+        # f = open("dni.txt", "w")
+        # f.write(dni)
+        # f.close()
 
         # Guardar en Cloudinary
         upload_result = cloudinary.uploader.upload(img, public_id = dni)
@@ -107,7 +107,7 @@ def register():
         f = open(f'face_recognition_and_liveness/face_recognition/dataset/{dni}/{secure_filename(img.filename)}','wb')
         response = requests.get(urlImage)
         f.write(response.content)
-        os.system("Codificador.bat")
+        # os.system("Codificador.bat")
         f.close()
 
         return redirect(url_for('login'))

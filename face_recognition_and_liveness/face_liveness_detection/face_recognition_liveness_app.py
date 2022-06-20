@@ -120,7 +120,7 @@ def recognition_liveness(model_path, le_path, detector_folder, encodings, confid
                 # loop over the encoded faces (even it's only 1 face in one bounding box)
                 # this is just a convention for other works with this kind of model
                 for encoding in encodings:
-                    matches = face_recognition.compare_faces(encoded_data['encodings'], encoding)
+                    matches = face_recognition.compare_faces(encoded_data['encodings'], encoding, tolerance=0.6)
                     
                     # check whether we found a matched face
                     if True in matches:
