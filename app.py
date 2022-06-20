@@ -22,7 +22,7 @@ CORS(app)
 mysql = MySQL();
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='211926'
+app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 

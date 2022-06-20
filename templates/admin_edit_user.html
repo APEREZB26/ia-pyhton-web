@@ -1,113 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editar Usuario</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_user.css') }}" />
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/global.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/content.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/edit_user.css') }}"
+    />
+  </head>
 
-<body style="height: 100vh;">
+  <body style="height: 100vh">
     <div>
+      <nav class="nav container">
+        <!-- Primary -->
+        <ul class="nav__primary">
+          <li class="nav__element">
+            <img
+              class="nav__element-logo"
+              src="{{ url_for('static', filename='assets/img/node.png') }}"
+              alt="icon"
+            />
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="/admin">Dashboard</a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="#">Features</a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="/admin/manage/listEmpl">Crud</a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="#">Apps</a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="#">Pages</a>
+          </li>
+        </ul>
 
-        <body>
-            <nav class="nav container">
-                <!-- Primary -->
-                <ul class="nav__primary">
-                    <li class="nav__element">
-                        <img class="nav__element-logo" src="{{ url_for('static', filename='assets/img/node.png') }}"
-                            alt="icon" />
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/admin">Dashboard</a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="#">Features</a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/admin/manage/listEmpl">Crud</a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="#">Apps</a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="#">Pages</a>
-                    </li>
-                </ul>
-
-                <!-- Secondary -->
-                <ul class="nav__secondary">
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/"><i class="fa-solid fa-magnifying-glass"></i></a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/"><i class="fa-solid fa-chart-pie"></i></a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/"><i class="fa-solid fa-chart-simple"></i></a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/"><i class="fa-solid fa-cart-arrow-down"></i></a>
-                    </li>
-                    <li class="nav__element">
-                        <img class="nav__element-from" src="{{ url_for('static', filename='assets/img/peru.png') }}"
-                            alt="peru" />
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="/">Hi, {{user.fullname}}</a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link nav__element-profile" href="/"></a>
-                    </li>
-                    <li class="nav__element">
-                        <a class="nav__element-link" href="{{ url_for('logout') }}">Salir</a>
-                    </li>
-                </ul>
-            </nav>
-            <hr class="divider" />
-            <div class="edit_user_form">
-                <div class="content__crud__tittle">
-                    <h2>Editar Usuario</h2>
-                </div>
-                <form action="/admin/manage/updateEmpl/{{user.0}}" class="main-datos-form" method="POST" enctype="multipart/form-data">
-                    <!-- Parte datos -->
-                    <div class="main-datos-form-img">
-                        <img class="edit-img" src={{user.7}} alt="img" />
-                        <input type="file" value="" name="photo" class="data-foto" />
-                    </div>
-                    <input type="text" value={{user.1}} name="fullname" maxlength="30" placeholder="Fullname"
-                        class="data" disabled />
-                    <input type="number" value={{user.4}} name="dni" maxlength="8" placeholder="N° Dni" class="data"
-                    disabled />
-                    <div class="edit__main__inputs_user">
-                        <input type="number" value={{user.5}} name="phone" maxlength="9" placeholder="+51"
-                            class="data" required />
-                    </div>
-                    <input type="email" value={{user.2}} name="email" placeholder="Email" class="data in-add-email"
-                    disabled />
-                    <!-- Parte botón -->
-                    <div class="submit_buttons">
-                        <a href="/admin/manage/listEmpl" class="cancel-button">Cancelar</a>
-                        <button  class="edit-button">Guardar</button>
-                        <a href="/admin/manage/deleteEmpl/{{user.0}}" class="delete-button">Eliminar</a>
-                    </div>
-                </form>
-<!-- 
-                <form action="/admin/manage/deleteEmpl/{{user.id}}" method="POST" class="cont_detele_button">
-                    <input type="hidden" value={{user.id}} class="delete-button" />
-                    <input type="submit" value="Eliminar" class="delete-button" />
-                </form> -->
-
+        <!-- Secondary -->
+        <ul class="nav__secondary">
+          <li class="nav__element">
+            <a class="nav__element-link" href="/"
+              ><i class="fa-solid fa-magnifying-glass"></i
+            ></a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="/"
+              ><i class="fa-solid fa-chart-pie"></i
+            ></a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="/"
+              ><i class="fa-solid fa-chart-simple"></i
+            ></a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="/"
+              ><i class="fa-solid fa-cart-arrow-down"></i
+            ></a>
+          </li>
+          <li class="nav__element">
+            <img
+              class="nav__element-from"
+              src="{{ url_for('static', filename='assets/img/peru.png') }}"
+              alt="peru"
+            />
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="/">Hi, {{user.fullname}}</a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link nav__element-profile" href="/"></a>
+          </li>
+          <li class="nav__element">
+            <a class="nav__element-link" href="{{ url_for('logout') }}"
+              >Salir</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <hr class="divider" />
+      <div class="edit_user_form">
+        <div class="content__crud__tittle">
+          <h2>Editar Usuario</h2>
+        </div>
+        <form
+          action="/admin/manage/updateEmpl/{{user.0}}"
+          class="main-datos-form"
+          method="POST"
+          enctype="multipart/form-data"
+          id="formAdd"
+        >
+          <!-- Parte datos -->
+          <div class="main-datos-form-img">
+            <img class="edit-img" src="{{user.7}}" alt="img" />
+            <input type="file" value="" name="photo" class="data-foto"  />
+          </div>
+          <input
+            type="text"
+            value="{{user.1}}"
+            name="fullname"
+            maxlength="30"
+            placeholder="Fullname"
+            class="data"
+            disabled
+     
+          />
+          <input
+            type="number"
+            value="{{user.4}}"
+            name="dni"
+            maxlength="8"
+            placeholder="N° Dni"
+            class="data"
+            disabled
+      
+          />
+          <div class="edit__main__inputs_user">
+            <input
+              type="number"
+              value="{{user.5}}"
+              name="phone"
+              maxlength="9"
+              placeholder="+51"
+              class="data"
+              required
+              id="inputPhone"
+            />
+          </div>
+          <input
+            type="email"
+            value="{{user.2}}"
+            name="email"
+            placeholder="Email"
+            class="data in-add-email"
+            disabled
+       
+          />
+          <input
+          type="hidden"
+          value="{{user.3}}"
+          name="email"
+          placeholder="Email"
+          class="data in-add-email"
+          disabled
+     
+        />
+          <!-- Parte botón -->
+          <div class="submit_buttons">
+            <a href="/admin/manage/listEmpl" class="cancel-button">Cancelar</a>
+            <button class="edit-button">Guardar</button>
+            <a href="/admin/manage/deleteEmpl/{{user.0}}" class="delete-button"
+              >Eliminar</a
+            >
+          </div>
+        </form>
+        <p id="errorForm" style="display: none; color: red; justify-content: center;">Error</p>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-</body>
-
+    <script src="{{ url_for('static', filename='js/validationFormEdit.js') }}">  </script>
+  </body>
 </html>

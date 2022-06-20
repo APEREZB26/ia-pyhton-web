@@ -73,23 +73,24 @@
       </div>
       <!-- Parte editar datos -->
       <div class="edit-main-datos">
-        <form action="/admin/manage/addEmpl" class="main-datos-form" method="POST" enctype="multipart/form-data">
+        <form action="/admin/manage/addEmpl" class="main-datos-form" method="POST" enctype="multipart/form-data" id="formAdd">
           <!-- Parte datos -->
           <div class="main-datos-form-img">
-            <img src="{{ url_for('static', filename='assets/img/user.jpg') }}" alt="img" />
-            <input type="file" value="" name="photo" class="data-foto" />
+            <img src="{{ url_for('static', filename='assets/img/peru.png') }}" alt="img" />
+            <input type="file" name="photo"  value="" id="inputImage"/>
           </div>
-          <input type="text" value="" name="fullname" maxlength="30" placeholder="Fullname" class="data" required />
-          <input type="number" value="" name="dni" maxlength="8" placeholder="N° Dni" class="data" required />
+          <input type="text" value="" name="fullname" maxlength="30" placeholder="Fullname" class="data" id="inputFullname" required autocomplete="off" />
+          <input type="number" value="" name="dni" maxlength="8" placeholder="N° Dni" class="data" id="inputDNI" required />
           <div class="edit__main__inputs">
-            <input type="number" value="" name="phone" maxlength="9" placeholder="+51" class="data" required />
+            <input type="number" value="" name="phone" maxlength="9" placeholder="+51" class="data" id="inputPhone" required autocomplete="off" />
           </div>
-          <input type="email" value="" name="email" placeholder="Email" class="data in-add-email d-none" required />
-          <input type="password" value="" name="password" maxlength="9" placeholder="Password" class="data in-add-pass d-none" required />
+          <input type="email" value="" name="email" placeholder="Email" class="data in-add-email d-none" id="inputEmail" required autocomplete="off" />
+          <input type="password" value="" name="password" maxlength="9" placeholder="Password" class="data in-add-pass d-none" id="inputPassword" required autocomplete="off" />
           <!-- Parte botón -->
           <input type="submit" value="Cancelar" class="cancel-button" />
           <input type="submit" value="Guardar" class="edit-button" />
         </form>
+        <p id="errorForm" style="display: none; color: red; justify-content: center;">Error</p>
       </div>
     </div>
   </div>
@@ -205,8 +206,9 @@
       </div>
     </div>
   </div>
-  <script src="{{ url_for('static', filename='js/Crud.js') }}">
-  </script>
+  <script src="{{ url_for('static', filename='js/Crud.js') }}">  </script>
+  <script src="{{ url_for('static', filename='js/validationFormAdd.js') }}">  </script>
+
 </body>
 
 </html>
