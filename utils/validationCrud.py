@@ -1,7 +1,24 @@
 from flask import request, redirect, url_for
 import re
 
-def employee_validation(mysql, fullname, email, dni, password, phone):
+def employee_validation_edit(mysql, phone):
+    phone=request.form["phone"]
+    exphone = re.compile("^[0-9]{9,9}")
+    regphone = exphone.search(phone)
+
+    if regphone is None:
+        return False, "Error : El teléfono es incorrecto"
+    else:
+        conn = mysql.connect();
+        cursor = conn.cursor();
+        cursor.execute("SELECT phone FROM proyect.employee WHERE phone={}".format(phone))
+        phoneBD = cursor.fetchone()
+        if (phoneBD == None):
+            return True, ""
+        else:
+            return False, "Error : El telefono ya existe"
+    
+def employee_validation_add(mysql, fullname, email, dni, password, phone):
     fullname = request.form["fullname"]
     exfullname = re.compile("^[a-zA-ZÀ-ÿ\s]{1,40}$")
     regfullname = exfullname.search(fullname)
@@ -22,7 +39,7 @@ def employee_validation(mysql, fullname, email, dni, password, phone):
 
     # Validaciones con regex
     if regfullname is None:
-        return False, " FULLNAME incorrecto"
+        return False, "Error : El nombre es incorrecto"
     else:
         print(regfullname)
         conn = mysql.connect();
@@ -32,7 +49,7 @@ def employee_validation(mysql, fullname, email, dni, password, phone):
 
         if (fullnameBD == None):
             if regemail is None:
-                return False, " EMAIL incorrecto"
+                return False, "Error : El email es incorrecto"
             else:
                 conn = mysql.connect();
                 cursor = conn.cursor();
@@ -41,7 +58,7 @@ def employee_validation(mysql, fullname, email, dni, password, phone):
 
                 if (emailBD == None):
                     if regdni is None:
-                        return False, " DNI incorrecto"
+                        return False, "Error : El DNI es incorrecto"
                     else:
                         conn = mysql.connect();
                         cursor = conn.cursor();
@@ -50,19 +67,19 @@ def employee_validation(mysql, fullname, email, dni, password, phone):
 
                         if (dniBD == None):
                             if regphone is None:
-                                return False, "PHONE incorrecto"
+                                return False, "Error : El teléfono es incorrecto"
                             else:
                                 conn = mysql.connect();
                                 cursor = conn.cursor();
                                 cursor.execute("SELECT phone FROM proyect.employee WHERE phone={}".format(phone))
                                 phoneBD = cursor.fetchone()
                                 if (phoneBD == None):
-                                    return True, "Usuario agregado"
+                                    return True, ""
                                 else:
-                                    return False, "PHONE duplicado"
+                                    return False, "Error : El telefono ya existe"
                         else:
-                            return False, " DNI duplicado"
+                            return False, "Error : El DNI ya existe"
                 else:
-                    return False, " EMAIL duplicado"
+                    return False, "Error : El email ya existe"
         else:
-            return False, " FULLNAME duplicado"
+            return False, "Error : El nombre ya existe"

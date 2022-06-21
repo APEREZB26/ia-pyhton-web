@@ -1,3 +1,4 @@
+from email import message
 from flask import Flask, request, redirect, url_for, render_template, session
 from flask_cors import CORS
 from flaskext.mysql import MySQL
@@ -5,7 +6,7 @@ from flaskext.mysql import MySQL
 # Controllers and services
 from controllers.auth.loginController import user_login
 from controllers.auth.registerController import user_register
-from controllers.admin.addEmployeeController import add_employee
+from controllers.admin.addEmployeeController import add_employee, edit_employee
 from services.admin.adminCRUD import *
 
 import cloudinary
@@ -75,9 +76,10 @@ def listAdmin():
 @app.route('/admin/manage/addEmpl', methods=['POST'])
 def addAdmin():
     if request.method == 'POST':
-        add_employee(mysql) 
+        message = add_employee(mysql) 
 
-    return redirect(url_for('listAdmin'))
+    usuarios = list_employeeDB(mysql)
+    return render_template('admin_crud_page.html', usuarios=usuarios,message=message)
 
 # Employee get for id
 @app.route('/admin/manage/getEmpl/<int:id>')
@@ -90,10 +92,10 @@ def getAdmin(id):
 # Employee update
 @app.route('/admin/manage/updateEmpl/<int:id>', methods=['POST'])
 def updateAdmin(id):
-    phone = request.form["phone"]
-    update_employeeDB(mysql, id, phone)
 
-    return redirect(url_for('listAdmin'))
+    message = edit_employee(mysql, id)
+    usuarios = list_employeeDB(mysql)
+    return render_template('admin_crud_page.html', usuarios=usuarios,message=message)
 
 
 # Employee delete

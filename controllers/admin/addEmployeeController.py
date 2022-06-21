@@ -5,10 +5,22 @@ from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from utils.uploadCloudinary import upload_image
 from services.admin.adminCRUD import add_employeeDB
-from utils.validationCrud import employee_validation
+from utils.validationCrud import employee_validation_add, employee_validation_edit
+from services.admin.adminCRUD import *
 import requests
 import os
+def edit_employee(mysql, id):
+    phone = request.form["phone"]
 
+    # Validación
+    isValid, message = employee_validation_edit(mysql, phone)
+
+    if (isValid == True):
+        update_employeeDB(mysql, id, phone)
+        return message
+    else:
+        return message
+    _
 def add_employee(mysql):
     fullname = request.form["fullname"]
     email= request.form["email"]
@@ -18,9 +30,7 @@ def add_employee(mysql):
     img = request.files['photo']
 
     # Validación
-    isValid, message = employee_validation(mysql, fullname, email, dni, password, phone)
-    print(isValid)
-    print(message)
+    isValid, message = employee_validation_add(mysql, fullname, email, dni, password, phone)
 
     if (isValid == True):
         # Guardar en Cloudinary
