@@ -156,7 +156,7 @@
     </div>
     <div class="content__crud">
       <div class="content__crud__tittle">
-        <h2>Listado de Empleados <p style="color: red;" id="#Validation">  {{ message }}</p></h2>
+        <h2>Listado de Empleados <p style="color: red;" id="Validate">  {{ message }}</p></h2>
         <button class="button-add">
           <img src="{{ url_for('static', filename='assets/img/agregar.png') }}" alt="img" />
         </button>
@@ -208,6 +208,7 @@
   </div>
   <script src="{{ url_for('static', filename='js/Crud.js') }}">  </script>
   <script src="{{ url_for('static', filename='js/validationFormAdd.js') }}">  </script>
+  <script src="{{ url_for('static', filename='js/validationCrud.js') }}">  </script>
 
 </body>
 
