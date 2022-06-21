@@ -11,14 +11,18 @@ def user_register(mysql):
     email = request.form["email"]
     dni = request.form['dni']
     password = generate_password_hash(request.form['password'], method='sha256')
+    flag = 0
     img = request.files['photo']
+    f = open("dni.txt", "w")
+    f.write(dni) 
+    f.close()
 
     # Guardar en Cloudinary
     upload_result = upload_image(img, dni)
     urlImage = str(upload_result['secure_url'])
 
     # Guarda en la BD
-    register_userDB(mysql, fullname, email, password, dni, 0 ,urlImage)
+    register_userDB(mysql, fullname, email, password, dni, flag ,urlImage)
 
     # Guardar en local
     os.mkdir(f'face_recognition_and_liveness/face_recognition/dataset/{dni}')

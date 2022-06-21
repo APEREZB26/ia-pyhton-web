@@ -20,7 +20,7 @@ CORS(app)
 mysql = MySQL();
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='sebas2001'
+app.config['MYSQL_DATABASE_PASSWORD']='kenneth'
 app.config['MYSQL_DATABASE_DB']='proyect'
 mysql.init_app(app)
 
@@ -75,10 +75,9 @@ def listAdmin():
 @app.route('/admin/manage/addEmpl', methods=['POST'])
 def addAdmin():
     if request.method == 'POST':
-        add_employee(mysql)
+        add_employee(mysql) 
 
     return redirect(url_for('listAdmin'))
-
 
 # Employee get for id
 @app.route('/admin/manage/getEmpl/<int:id>')
