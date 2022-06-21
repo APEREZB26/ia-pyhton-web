@@ -14,7 +14,7 @@ def employee_validation_edit(mysql, phone):
         cursor.execute("SELECT phone FROM proyect.employee WHERE phone={}".format(phone))
         phoneBD = cursor.fetchone()
         if (phoneBD == None):
-            return True, ""
+            return True, "Telefono actualizado exitosamente"
         else:
             return False, "Error : El telefono ya existe"
     
@@ -74,7 +74,7 @@ def employee_validation_add(mysql, fullname, email, dni, password, phone):
                                 cursor.execute("SELECT phone FROM proyect.employee WHERE phone={}".format(phone))
                                 phoneBD = cursor.fetchone()
                                 if (phoneBD == None):
-                                    return True, ""
+                                    return True, "Empleado creado exitosamente"
                                 else:
                                     return False, "Error : El telefono ya existe"
                         else:
