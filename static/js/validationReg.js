@@ -5,6 +5,14 @@ const spinner = document.querySelector(".spinner-container");
 const containerReg = document.querySelector(".containerReg");
 const msgError = document.querySelector(".error");
 
+
+const messageError = document.getElementById("message-error");
+// Message error in document html register_page
+messageError.style.display = "block";
+setTimeout(() => {
+  messageError.style.display = "none";
+}, 3000);
+
 const expresiones = {
   fullname: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
   password: /^.{4,12}$/,

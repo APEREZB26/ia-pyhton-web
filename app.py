@@ -14,104 +14,110 @@ import cloudinary.uploader
 import cloudinary.api
 
 app = Flask(__name__)
-app.secret_key = 'elmejorgurpo'  #SECRET KEY
+app.secret_key = "elmejorgurpo"  # SECRET KEY
 CORS(app)
 
 # Conexion a la DB
-mysql = MySQL();
-app.config['MYSQL_DATABASE_HOST']='localhost'
-app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='kenneth'
-app.config['MYSQL_DATABASE_DB']='proyect'
+mysql = MySQL()
+app.config["MYSQL_DATABASE_HOST"] = "localhost"
+app.config["MYSQL_DATABASE_USER"] = "root"
+app.config["MYSQL_DATABASE_PASSWORD"] = "sebas2001"
+app.config["MYSQL_DATABASE_DB"] = "proyect"
 mysql.init_app(app)
 
-cloudinary.config( 
-  cloud_name = "awdw", 
-  api_key = "249828171516131", 
-  api_secret = "hqKtXEr0J1nu4G2bbaF3rJNE8yY",
-  secure = True
+cloudinary.config(
+    cloud_name="awdw",
+    api_key="249828171516131",
+    api_secret="hqKtXEr0J1nu4G2bbaF3rJNE8yY",
+    secure=True,
 )
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for("login"))
+
 
 # === AUTH ===
 # Login User
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == 'POST':
+    if request.method == "POST":
         return user_login(mysql)
 
-    return render_template('login_page.html')
+    return render_template("login_page.html")
 
 
 # Register Client
-@app.route('/register', methods=['GET', 'POST'])
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == 'POST':
+    if request.method == "POST":
         return user_register(mysql)
 
-    return render_template('register_page.html')
+    return render_template("register_page.html")
 
-@app.route('/client', methods=['GET', 'POST'])
+
+@app.route("/client", methods=["GET", "POST"])
 def client():
-    return render_template('client_page.html')
+    return render_template("client_page.html")
 
-@app.route('/admin', methods=['GET'])
+
+@app.route("/admin", methods=["GET"])
 def admin():
-    return render_template('admin_page.html')
+    return render_template("admin_page.html")
 
 
 # === CRUD EMPLOYEE ===
 # Employee list
-@app.route('/admin/manage/listEmpl', methods=['GET', 'POST'])
+@app.route("/admin/manage/listEmpl", methods=["GET", "POST"])
 def listAdmin():
-    if request.method == 'GET':
+    if request.method == "GET":
         usuarios = list_employeeDB(mysql)
 
-    return render_template('admin_crud_page.html', usuarios=usuarios)
+    return render_template("admin_crud_page.html", usuarios=usuarios)
+
 
 # Employee create
-@app.route('/admin/manage/addEmpl', methods=['POST'])
+@app.route("/admin/manage/addEmpl", methods=["POST"])
 def addAdmin():
-    if request.method == 'POST':
-        message = add_employee(mysql) 
+    if request.method == "POST":
+        message = add_employee(mysql)
 
     usuarios = list_employeeDB(mysql)
-    return render_template('admin_crud_page.html', usuarios=usuarios,message=message)
+    return render_template("admin_crud_page.html", usuarios=usuarios, message=message)
+
 
 # Employee get for id
-@app.route('/admin/manage/getEmpl/<int:id>')
+@app.route("/admin/manage/getEmpl/<int:id>")
 def getAdmin(id):
     user = get_employeeDB(mysql, id)
 
-    return render_template('admin_edit_user.html', user=user)
+    return render_template("admin_edit_user.html", user=user)
 
 
 # Employee update
-@app.route('/admin/manage/updateEmpl/<int:id>', methods=['POST'])
+@app.route("/admin/manage/updateEmpl/<int:id>", methods=["POST"])
 def updateAdmin(id):
 
     message = edit_employee(mysql, id)
     usuarios = list_employeeDB(mysql)
-    return render_template('admin_crud_page.html', usuarios=usuarios,message=message)
+    return render_template("admin_crud_page.html", usuarios=usuarios, message=message)
 
 
 # Employee delete
-@app.route('/admin/manage/deleteEmpl/<int:id>')
+@app.route("/admin/manage/deleteEmpl/<int:id>")
 def deleteAdmin(id):
     delete_employeeDB(mysql, id)
 
-    return redirect(url_for('listAdmin'))
+    return redirect(url_for("listAdmin"))
 
 
 # === LOGOUT ===
-@app.route('/logout')
+@app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for("login"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

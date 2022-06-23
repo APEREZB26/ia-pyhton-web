@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Editar Usuario</title>
+    <title>Admin Edit</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/global.css') }}"
@@ -109,7 +109,7 @@
           <!-- Parte datos -->
           <div class="main-datos-form-img">
             <img class="edit-img" src="{{user.7}}" alt="img" />
-            <input type="file" value="" name="photo" class="data-foto"  />
+            <input type="file" value="" name="photo" class="data-foto" />
           </div>
           <input
             type="text"
@@ -119,7 +119,6 @@
             placeholder="Fullname"
             class="data"
             disabled
-     
           />
           <input
             type="number"
@@ -129,7 +128,6 @@
             placeholder="N° Dni"
             class="data"
             disabled
-      
           />
           <div class="edit__main__inputs_user">
             <input
@@ -150,17 +148,15 @@
             placeholder="Email"
             class="data in-add-email"
             disabled
-       
           />
           <input
-          type="hidden"
-          value="{{user.3}}"
-          name="email"
-          placeholder="Email"
-          class="data in-add-email"
-          disabled
-     
-        />
+            type="hidden"
+            value="{{user.3}}"
+            name="email"
+            placeholder="Email"
+            class="data in-add-email"
+            disabled
+          />
           <!-- Parte botón -->
           <div class="submit_buttons">
             <a href="/admin/manage/listEmpl" class="cancel-button">Cancelar</a>
@@ -170,9 +166,14 @@
             >
           </div>
         </form>
-        <p id="errorForm" style="display: none; color: red; justify-content: center;">Error</p>
+        <p
+          id="errorForm"
+          style="display: none; color: red; justify-content: center"
+        >
+          Error
+        </p>
       </div>
     </div>
-    <script src="{{ url_for('static', filename='js/validationFormEdit.js') }}">  </script>
+    <script src="{{ url_for('static', filename='js/validationFormEdit.js') }}"></script>
   </body>
 </html>

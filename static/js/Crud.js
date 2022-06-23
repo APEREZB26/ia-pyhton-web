@@ -7,20 +7,6 @@ buttonsEdit.forEach((buttonEdit) => {
   });
 });
 
-/* PARA CERRAR EL MODAL DELETE*/
-// const closeModalDelete = document.querySelector(".button-cancelar");
-// closeModalDelete.addEventListener("click", () => {
-//   document.querySelector(".content-modal-delete").classList.toggle("open");
-// });
-
-// /* PARA ABRIR EL MODAL GUARDAR EMPLEADO*/
-// const modalEdit = document.querySelector(".button-edit");
-// modalEdit.addEventListener("click", () => {
-//   document.querySelector(".content-modal-edit").classList.toggle("open");
-//   document.querySelector(".in-add-email").classList.add("d-none");
-//   document.querySelector(".in-add-pass").classList.add("d-none");
-// });
-
 const modalAdd = document.querySelector(".button-add");
 modalAdd.addEventListener("click", () => {
   document.querySelector(".content-modal-edit").classList.toggle("open");

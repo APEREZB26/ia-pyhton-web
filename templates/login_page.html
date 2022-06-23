@@ -1,58 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
 
-<head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <meta charset="UTF-8">
-  <title>Login Page</title>
-
-</head>
-
-<body>
-  <div class="back-img">
-    <div class="logo">
-      <a href="./login">LOGO</a>
+  <body>
+    <div class="back-img">
+      <div class="logo">
+        <a href="./login">LOGO</a>
+      </div>
+      <div class="bubbleR">
+        Inicia Tu Cuenta Ahora y Disfruta de los Beneficios
+      </div>
+      <img src="{{ url_for('static', filename='assets/login.svg') }}" />
     </div>
-    <div class="bubbleR">Inicia Tu Cuenta Ahora y Disfruta de los Beneficios</div>
-    <img src="{{ url_for('static', filename='assets/login.svg') }}">
-  </div>
-  <!--/.back-img-->
-  <div class="form-section">
-    <div>
-      <h1>Iniciar Sesión</h1>
-      <br>
-      <br>
-      <form method="POST" id="formLog">
-        <!--Email-->
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <label>DNI</label>
-          <input type="text" id="sample3" class="inputLog" name="dni" placeholder="DNI">
-        </div>
-        <!--Password-->
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <label>Contraseña</label>
-          <input type="password" id="sample3" class="inputLog" name="password" placeholder="Contraseña">
-        </div>
-        <br>
-        {% if incorrect == True %}
-        <p style="color:red"> Usuario o Contraseña incorrectos </p>
-        {% elif invalid_user == True %}
-        <p style="color:red"> Tu no eres {{username}} </p>
-        {% endif %}
-        <!--CheckBox-->
-        <p class="error">Por favor rellena todos tus datos</p>
-        <button type="submit" class="sign-in-btn">
-          Sign In
-        </button>
-        <p class="forgot-text">Aun No tienes Cuenta? <a href="./register">Registrate</a></p>
-        <!--/button-->
-      </form>
+    <!--/.back-img-->
+    <div class="form-section">
+      <div>
+        <h1>Iniciar Sesión</h1>
+        <br />
+        <br />
+        <form method="POST" id="formLog">
+          <!--Email-->
+          <div
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+          >
+            <label>DNI</label>
+            <input
+              type="text"
+              id="sample3"
+              class="inputLog"
+              name="dni"
+              placeholder="DNI"
+            />
+          </div>
+          <!--Password-->
+          <div
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+          >
+            <label>Contraseña</label>
+            <input
+              type="password"
+              id="sample3"
+              class="inputLog"
+              name="password"
+              placeholder="Contraseña"
+            />
+          </div>
+          <br />
+          {% if incorrect == True %}
+          <p style="color: red">Usuario o Contraseña incorrectos</p>
+          {% elif invalid_user == True %}
+          <p style="color: red">Tu no eres {{username}}</p>
+          {% endif %}
+          <!--CheckBox-->
+          <p class="error">Por favor rellena todos tus datos</p>
+          <button type="submit" class="sign-in-btn">Sign In</button>
+          <p class="forgot-text">
+            Aun No tienes Cuenta? <a href="./register">Registrate</a>
+          </p>
+          <!--/button-->
+        </form>
+      </div>
+      <br />
     </div>
-    <br>
-
-  </div>
-  <!--/.form-section-->
-  <script type='text/javascript' src="{{ url_for('static', filename='js/validationLog.js') }}"></script>
-</body>
-
+    <!--/.form-section-->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/validationLog.js') }}"
+    ></script>
+  </body>
 </html>

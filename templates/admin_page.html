@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Admin Home</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -12,9 +12,18 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/content.css') }}"/>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/global.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/content.css') }}"
+    />
   </head>
 
   <body>
@@ -116,13 +125,19 @@
           </div>
         </div>
         <div class="content__stats-image">
-          <img src="{{ url_for('static', filename='assets/img/linea.png') }}" alt="img" />
+          <img
+            src="{{ url_for('static', filename='assets/img/linea.png') }}"
+            alt="img"
+          />
         </div>
         <div class="content__stats-more">
           <div class="more__element">
             <div class="more__element-div">
               <div class="more__element-image">
-                <img src="{{ url_for('static', filename='assets/img/java.png') }}" alt="img" />
+                <img
+                  src="{{ url_for('static', filename='assets/img/java.png') }}"
+                  alt="img"
+                />
               </div>
               <div class="more__element-name">
                 <h4>Top Authors</h4>
@@ -138,7 +153,10 @@
           <div class="more__element">
             <div class="more__element-div">
               <div class="more__element-image">
-                <img src="{{ url_for('static', filename='assets/img/javascript.png') }}" alt="img" />
+                <img
+                  src="{{ url_for('static', filename='assets/img/javascript.png') }}"
+                  alt="img"
+                />
               </div>
               <div class="more__element-name">
                 <h4>Top Sellers</h4>
@@ -154,7 +172,10 @@
           <div class="more__element">
             <div class="more__element-div">
               <div class="more__element-image">
-                <img src="{{ url_for('static', filename='assets/img/python.png') }}" alt="img" />
+                <img
+                  src="{{ url_for('static', filename='assets/img/python.png') }}"
+                  alt="img"
+                />
               </div>
               <div class="more__element-name">
                 <h4>Top Engagement</h4>

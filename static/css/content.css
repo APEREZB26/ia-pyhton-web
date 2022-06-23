@@ -273,10 +273,10 @@
 /*_________________*/
 
 /* content modal editar */
-.content-modal-edit.open{
+.content-modal-edit.open {
   display: block;
 }
-.content-modal-edit{
+.content-modal-edit {
   display: none;
   position: fixed;
   top: 0;
@@ -286,26 +286,26 @@
   background-color: rgba(0, 0, 0, 0.377);
   z-index: 99;
 }
-.modal-edit-main{
+.modal-edit-main {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 500px;
   height: auto;
   border-radius: 8px;
   background-color: #ffff;
   z-index: 100;
 }
-.edit-main-info{
+.edit-main-info {
   margin: 20px 40px;
   border-bottom: solid 2px #8c8c8c91;
 }
-.edit-main-datos{
+.edit-main-datos {
   height: auto;
   margin: 0 40px 20px 40px;
 }
-.main-datos-form{
+.main-datos-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -317,36 +317,36 @@
   width: 100%;
   margin-bottom: 1rem;
 }
-.main-datos-form img{
+.main-datos-form img {
   width: 150px;
   border-radius: 50%;
 }
-.edit__main__inputs{
+.edit__main__inputs {
   display: flex;
   flex-direction: row;
   max-width: 400px;
 }
-.main-datos-form input{
+.main-datos-form input {
   text-decoration: none;
   height: auto;
   border: none;
   outline: none;
   border-bottom: solid 2px rgb(138, 180, 248);
 }
-.data{
+.data {
   width: 90%;
   margin: 10px;
   padding: 10px;
 }
-.data-foto{
+.data-foto {
   width: 150px;
-  padding: 46px 10px;  
+  padding: 46px 10px;
   border-radius: 8px;
   margin: -130px 30px 0 30px;
   outline: none;
   opacity: 0;
 }
-.edit-button{
+.edit-button {
   float: left;
   border-radius: 8px;
   width: 70%;
@@ -359,7 +359,7 @@
   text-align: center;
   border: none;
 }
-.cancel-button{
+.cancel-button {
   float: right;
   border-radius: 8px;
   width: 70%;
@@ -370,10 +370,10 @@
   text-align: center;
 }
 /* content modal eliminar */
-.content-modal-delete.open{
+.content-modal-delete.open {
   display: block;
 }
-.content-modal-delete{
+.content-modal-delete {
   display: none;
   position: fixed;
   top: 0;
@@ -383,26 +383,26 @@
   background-color: rgba(0, 0, 0, 0.377);
   z-index: 99;
 }
-.modal-delete-main{
+.modal-delete-main {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 500px;
   height: auto;
   border-radius: 8px;
   background-color: #ffff;
 }
-.delete-main-info{
+.delete-main-info {
   margin: 40px 40px 20px 40px;
   text-align: center;
 }
-.delete-main-button{
+.delete-main-button {
   margin: 10px;
   height: auto;
   text-align: center;
 }
-.delete-main-button button{
+.delete-main-button button {
   margin: 20px 40px;
   padding: 0;
   width: 150px;
@@ -411,20 +411,20 @@
   border-radius: 8px;
   border: none;
   color: #fff;
-  transition: .5s;
+  transition: 0.5s;
   background-color: rgba(255, 0, 0, 0.685);
 }
-.delete-main-button button a{
+.delete-main-button button a {
   padding: 10px 50px;
   color: #fff;
 }
-.delete-main-button button:first-child{
+.delete-main-button button:first-child {
   background-color: rgb(72, 159, 240);
 }
-.delete-main-button button:first-child:hover{
+.delete-main-button button:first-child:hover {
   background-color: rgb(48, 99, 146);
 }
-.delete-main-button button:hover{
+.delete-main-button button:hover {
   background-color: rgba(163, 25, 25, 0.685);
 }
 
@@ -445,7 +445,7 @@
   box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
-.more__element-crud-button{
+.more__element-crud-button {
   color: black;
 }
 .more__element-crud {
@@ -456,8 +456,8 @@
   border-radius: 8px;
 }
 .more__element-crud:hover {
- background-color: #a8a6a667;
- transition: 1s
+  background-color: #a8a6a667;
+  transition: 1s;
 }
 .more__element-crud-div {
   display: flex;
@@ -478,13 +478,13 @@
   border-radius: 8px;
   margin-bottom: 30px;
 }
-.content__crud__tittle{
+.content__crud__tittle {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border-bottom: solid 3px #8c8c8c3f;
 }
-.crud-table-main{
+.crud-table-main {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -493,37 +493,37 @@
   overflow: hidden;
   user-select: text;
 }
-.table-main-table{
+.table-main-table {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
-.table-main-table *{
+.table-main-table * {
   border-collapse: collapse;
   padding: 10px;
 }
-.table-main-table td button{
+.table-main-table td button {
   user-select: none;
 }
-.table-main-table td img{
+.table-main-table td img {
   width: 50px;
   padding: 5px;
 }
-.table-main-table thead{
+.table-main-table thead {
   font-size: 0.9rem;
   color: #000000;
   border-radius: 8px;
   background-color: #2ba1e2;
   border-bottom: solid 8px #8c8c8c3f;
 }
-.table-main-table tbody{
+.table-main-table tbody {
   font-size: 0.9rem;
   color: #8c8c8c;
   border-radius: 8px;
   border-bottom: solid 3px #8c8c8c3f;
   background-color: #2ba2e213;
 }
-.table-main-table tr:nth-child(even){
+.table-main-table tr:nth-child(even) {
   background-color: #2ba2e21e;
 }
 .content__crud button {
@@ -540,8 +540,9 @@
   background-color: rgb(75, 159, 238);
 }
 
-.content__crud button img{
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(104%) contrast(103%);
+.content__crud button img {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(360deg)
+    brightness(104%) contrast(103%);
   padding: 5px;
   width: 30px;
   height: 30px;
@@ -550,40 +551,40 @@
 /*____________________*/
 /*   CrudConfig.html  */
 /*____________________*/
-.crud-portada-main{
+.crud-portada-main {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 200px;
   overflow: hidden;
 }
-.crud-portada-main img{
+.crud-portada-main img {
   width: 100%;
   height: 500px;
 }
-.portada-main-perfil{
+.portada-main-perfil {
   background-color: green;
   width: 150px;
   height: 150px;
   margin: -60px 50% 0 50%;
-  transform: translate(-50%,-10%);
+  transform: translate(-50%, -10%);
   border-radius: 8px;
 }
-.portada-main-perfil img{
+.portada-main-perfil img {
   width: 100%;
   height: 100%;
 }
-.crud-perfil-main{
+.crud-perfil-main {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
-.perfil-main-form{
+.perfil-main-form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.perfil-main-form input{
+.perfil-main-form input {
   margin: 10px;
   width: 250px;
   padding: 10px;
@@ -592,43 +593,43 @@
   border: none;
   border-bottom: solid 1px #8c8c8c;
 }
-.dato{
+.dato {
   background-color: #fff;
 }
-.dato-edit-dis{
+.dato-edit-dis {
   background-color: #fff;
 }
-.dato-edit{
+.dato-edit {
   display: none;
   background-color: #fff;
 }
-.dato-edit.open{
+.dato-edit.open {
   display: block;
 }
-.dato-edit-dis.open{
- display: none;
+.dato-edit-dis.open {
+  display: none;
 }
-.from-button-main{
+.from-button-main {
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
 }
-.from-button-main.open{
+.from-button-main.open {
   display: none;
 }
-.from-button{
+.from-button {
   display: none;
   flex-direction: row;
   justify-content: center;
   width: 100%;
 }
-.from-button.open{
+.from-button.open {
   display: flex;
 }
 
-.d-none{
+.d-none {
   display: none;
 }
 
