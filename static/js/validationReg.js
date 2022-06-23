@@ -5,7 +5,6 @@ const spinner = document.querySelector(".spinner-container");
 const containerReg = document.querySelector(".containerReg");
 const msgError = document.querySelector(".error");
 
-
 const messageError = document.getElementById("message-error");
 // Message error in document html register_page
 messageError.style.display = "block";
@@ -14,11 +13,11 @@ setTimeout(() => {
 }, 3000);
 
 const expresiones = {
-  fullname: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
-  password: /^.{4,12}$/,
+  fullname: /^[a-zA-ZÀ-ÿ\s]{6,40}$/,
+  password: /^.{6,24}$/,
   email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
   photo: /^/,
-  dni: /^/,
+  dni: /^.{8,12}$/,
   checkbox: /^/,
 };
 
@@ -44,16 +43,25 @@ const validarFormulario = (e) => {
       break;
     case "dni":
       validarCampo(expresiones.dni, e.target, "dni");
+      validarDni()
       break;
     case "password":
       validarCampo(expresiones.password, e.target, "password");
       break;
     case "checkbox":
       validarCampo(expresiones.checkbox, e.target, "checkbox");
-      console.log(campos["checkbox"]);
       break;
   }
 };
+
+const validarDni = () =>{
+  dniValue = document.getElementById("dni").value;
+  if(dniValue.length >= 8){
+    campos['dni']=true
+  }else{
+    campos['dni']=false
+  }
+}
 
 const validarCampo = (expresion, input, camp) => {
   if (expresion.test(input.value)) {
